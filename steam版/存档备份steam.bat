@@ -6,19 +6,19 @@ color 0a
 GOTO MENU
 :MENU
 ECHO.
-ECHO.                                =-=-=-=-=Ñ¡ÔñÄãÒª¶Ô´æµµ½øÐÐµÄ²Ù×÷=-=-=-=-=
+ECHO.                                =-=-=-=-=é€‰æ‹©ä½ è¦å¯¹å­˜æ¡£è¿›è¡Œçš„æ“ä½œ=-=-=-=-=
 ECHO.                                =                                        =
-ECHO.                                =            1  ±¸·Ý´æµµ(Steam)          =
+ECHO.                                =            1  å¤‡ä»½å­˜æ¡£(Steam)          =
 ECHO.                                =                                        =
-ECHO.                                =            2  »Ö¸´ÉÏ´Î±¸·Ý             =
+ECHO.                                =            2  æ¢å¤ä¸Šæ¬¡å¤‡ä»½             =
 ECHO.                                =                                        =
-ECHO.                                =            3  É¾³ý¾ÉµÄ±¸·Ý             =
+ECHO.                                =            3  åˆ é™¤æ—§çš„å¤‡ä»½             =
 ECHO.                                =                                        =
-ECHO.                                =            4  ÍË   ³ö                  =
+ECHO.                                =            4  é€€   å‡º                  =
 ECHO.                                =                                        =
 ECHO.                                =-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=
 ECHO.                             
-echo.ÇëÊäÈëÑ¡ÔñÏîÄ¿µÄÐòºÅºó°´»Ø³µ£º
+echo.è¯·è¾“å…¥é€‰æ‹©é¡¹ç›®çš„åºå·åŽæŒ‰å›žè½¦ï¼š
 set /p  ID=
 if "%id%"=="1"  goto cmd1
 
@@ -31,25 +31,23 @@ PAUSE
 
 :cmd1
 
-@echo ±¸·Ý´æµµÖÐ¡­¡­¡­¡­
+@echo å¤‡ä»½å­˜æ¡£ä¸­â€¦â€¦â€¦â€¦
 @echo.
 @echo.
-@rd  .\BackUpSaveDate\NEW\582010\ /S /Q 
-@xcopy .\BackUpSaveDate\NEW\*.* .\BackUpSaveDate\OLD\ /S /Q /Y
-@rd  .\BackUpSaveDate\NEW\ /S /Q 
 @set YYYYmmdd=%date:~0,4%%date:~5,2%%date:~8,2%
 @set sec=%TIME:~3,2%%TIME:~6,2%
 @Set h=%TIME:~0,2%
 @If %h% leq 9 (Set h=0%h:~1,1%)
 @set hhmiss=%h%%sec%
 @set "filename=%YYYYmmdd%_%hhmiss%"
-@xcopy .\582010\*.* .\BackUpSaveDate\NEW\%filename%\ /S /Q /Y
+@rd  .\BackUpSaveDate\NEW\582010\ /S /Q 
+@xcopy .\582010\*.* .\BackUpSaveDate\OLD\%filename%\ /S /Q /Y
 @xcopy .\582010\*.* .\BackUpSaveDate\NEW\582010\ /S /Q /Y
 @echo.
 @echo.
-@echo ±¸·ÝÍê³É£¡
+@echo å¤‡ä»½å®Œæˆï¼
 @echo -----------------------------------------
-@echo ±¾´ÎµÄ±¸·ÝµÄ´æµµÎÄ¼þÃûÎª£º%filename% 
+@echo æœ¬æ¬¡çš„å¤‡ä»½çš„å­˜æ¡£æ–‡ä»¶åä¸ºï¼š%filename% 
 @echo -----------------------------------------
 choice /t 5 /d y /n >nul 
 goto MENU
@@ -58,11 +56,11 @@ goto MENU
 
 :MENU2
 ECHO.****************************
-ECHO.    È·ÈÏ»Ö¸´×îºóÒ»´Î´æµµ
+ECHO.    ç¡®è®¤æ¢å¤æœ€åŽä¸€æ¬¡å­˜æ¡£
 ECHO.    
-ECHO.    1  È·ÈÏ
+ECHO.    1  ç¡®è®¤
 ECHO.    
-ECHO.    2  È¡Ïû
+ECHO.    2  å–æ¶ˆ
 ECHO. 
 ECHO.****************************
 echo.
@@ -72,14 +70,14 @@ if "%id%"=="1"  goto amd1
 if "%id%"=="2" goto :MENU
 
 :amd1
-@echo ±¸·Ý»Ö¸´ÖÐ¡­¡­¡­¡­
+@echo å¤‡ä»½æ¢å¤ä¸­â€¦â€¦â€¦â€¦
 @echo.
 @echo.
-@xcopy .\582010\*.* .\582010bak\ /S /Q /y
+@xcopy .\582010\*.* .\BackUpSaveDate\582010bak\ /S /Q /y
 @xcopy .\BackUpSaveDate\NEW\582010\*.* .\582010\ /S /Q /y
 @echo.
 @echo.
-@echo »Ö¸´×îÐÂ±¸·ÝµÄ´æµµÍê³É£¡
+@echo æ¢å¤æœ€æ–°å¤‡ä»½çš„å­˜æ¡£å®Œæˆï¼
 choice /t 5 /d y /n >nul 
 GOTO MENU
 
@@ -87,11 +85,11 @@ GOTO MENU
 
 :MENU3
 ECHO.***********************************************
-ECHO.    È·ÈÏÉ¾³ý¾É´æµµ±¸·Ý£¨±£Áô×î½üÒ»´ÎµÄ±¸·Ý£©
+ECHO.    ç¡®è®¤åˆ é™¤æ—§å­˜æ¡£å¤‡ä»½ï¼ˆä¿ç•™æœ€è¿‘ä¸€æ¬¡çš„å¤‡ä»½ï¼‰
 ECHO.    
-ECHO.    1  È·ÈÏ
+ECHO.    1  ç¡®è®¤
 ECHO.    
-ECHO.    2  È¡Ïû
+ECHO.    2  å–æ¶ˆ
 ECHO. 
 ECHO.***********************************************
 echo.
@@ -105,6 +103,6 @@ if "%id%"=="2" goto :MENU
 @echo.
 @echo.
 @rd .\BackUpSaveDate\OLD\ /S /Q 
-@echo É¾³ý¾É´æµµ±¸·ÝÍê³É£¡
+@echo åˆ é™¤æ—§å­˜æ¡£å¤‡ä»½å®Œæˆï¼
 choice /t 5 /d y /n >nul 
 GOTO MENU
