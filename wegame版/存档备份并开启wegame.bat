@@ -1,27 +1,22 @@
-@echo ±¸·İ´æµµÖĞ¡­¡­¡­¡­
+@echo å¤‡ä»½å­˜æ¡£ä¸­â€¦â€¦â€¦â€¦
 @echo.
 @echo.
-@rd  .\rail_user_data\BackUpSaveDate\NEW\2000293\ /S /Q 
-@xcopy .\rail_user_data\BackUpSaveDate\NEW\*.* .\rail_user_data\BackUpSaveDate\OLD\ /S /Q /Y
-@rd  .\rail_user_data\BackUpSaveDate\NEW\ /S /Q 
 @set YYYYmmdd=%date:~0,4%%date:~5,2%%date:~8,2%
 @set sec=%TIME:~3,2%%TIME:~6,2%
 @Set h=%TIME:~0,2%
 @If %h% leq 9 (Set h=0%h:~1,1%)
 @set hhmiss=%h%%sec%
 @set "filename=%YYYYmmdd%_%hhmiss%"
-@xcopy .\rail_user_data\2000293\*.* .\rail_user_data\BackUpSaveDate\NEW\%filename%\ /S /Q /Y
+@rd  .\rail_user_data\BackUpSaveDate\NEW\2000293\ /S /Q 
+@xcopy .\rail_user_data\2000293\*.* .\rail_user_data\BackUpSaveDate\OLD\%filename%\ /S /Q /Y
 @xcopy .\rail_user_data\2000293\*.* .\rail_user_data\BackUpSaveDate\NEW\2000293\ /S /Q /Y
 @echo.
 @echo.
-@echo ±¸·İÍê³É£¡
-@echo.
-@echo.
-@echo.
+@echo å¤‡ä»½å®Œæˆï¼
 @echo -----------------------------------------
-@echo ±¾´ÎµÄ±¸·İµÄ´æµµÎÄ¼şÃûÎª£º%filename% 
+@echo æœ¬æ¬¡çš„å¤‡ä»½çš„å­˜æ¡£æ–‡ä»¶åä¸ºï¼š%filename% 
 @echo -----------------------------------------
 @echo.
 @echo.
 @echo.
-@start D:\±¤‰¾Ö®Ò¹\GameLauncher\GameLauncher.exe
+@start D:\å ¡å£˜ä¹‹å¤œ\GameLauncher\GameLauncher.exe
