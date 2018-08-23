@@ -1,21 +1,19 @@
-@echo ±¸·İ´æµµÖĞ¡­¡­¡­¡­
+@echo å¤‡ä»½å­˜æ¡£ä¸­â€¦â€¦â€¦â€¦
 @echo.
 @echo.
-@rd  .\BackUpSaveDate\NEW\582010\ /S /Q 
-@xcopy .\BackUpSaveDate\NEW\*.* .\BackUpSaveDate\OLD\ /S /Q /Y
-@rd  .\BackUpSaveDate\NEW\ /S /Q 
 @set YYYYmmdd=%date:~0,4%%date:~5,2%%date:~8,2%
 @set sec=%TIME:~3,2%%TIME:~6,2%
 @Set h=%TIME:~0,2%
 @If %h% leq 9 (Set h=0%h:~1,1%)
 @set hhmiss=%h%%sec%
 @set "filename=%YYYYmmdd%_%hhmiss%"
-@xcopy .\582010\*.* .\BackUpSaveDate\NEW\%filename%\ /S /Q /Y
+@rd  .\BackUpSaveDate\NEW\582010\ /S /Q 
+@xcopy .\582010\*.* .\BackUpSaveDate\OLD\%filename%\ /S /Q /Y
 @xcopy .\582010\*.* .\BackUpSaveDate\NEW\582010\ /S /Q /Y
 @echo.
 @echo.
-@echo ±¸·İÍê³É£¡
+@echo å¤‡ä»½å®Œæˆï¼
 @echo -----------------------------------------
-@echo ±¾´ÎµÄ±¸·İµÄ´æµµÎÄ¼şÃûÎª£º%filename% 
+@echo æœ¬æ¬¡çš„å¤‡ä»½çš„å­˜æ¡£æ–‡ä»¶åä¸ºï¼š%filename% 
 @echo -----------------------------------------
 @start ..\..\Steam.exe
