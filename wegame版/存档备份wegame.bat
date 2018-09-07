@@ -142,7 +142,7 @@ if "%id%"=="0" goto :MENU
 
 :down1
 echo.下载开始
-bitsadmin.exe /transfer "下载中，若速度较慢请使用网盘下载链接：https://pan.baidu.com/s/1Y85E3rTRoUeXhEOUr3SGyQ 密码：xr0k" http://www.moecn.com/download/MHWMODWG.zip D:\MHWMODWG.zip
+bitsadmin.exe /transfer "下载中，若速度较慢请使用网盘下载" http://www.moecn.com/download/MHWMODWG.zip D:\MHWMODWG.zip
 @echo f|xcopy D:\MHWMODWG.zip .\MHWMODWG.zip
 @del D:\MHWMODWG.zip
 @echo.下载完成，请右键单击MHWMODWG.zip选择解压到当前文件夹
