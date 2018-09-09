@@ -1,4 +1,4 @@
-@echo 备份存档中…………
+﻿@echo 备份存档中…………
 @echo.
 @echo.
 @set YYYYmmdd=%date:~0,4%%date:~5,2%%date:~8,2%
@@ -18,5 +18,5 @@
 @echo -----------------------------------------
 @echo.
 @echo.
-@echo.
+@echo. 编辑下面的地址为你的wegame启动器地址
 @start D:\堡壘之夜\GameLauncher\GameLauncher.exe

@@ -1,4 +1,4 @@
-cls
+﻿cls
 @ECHO OFF
 CLS
 color 0a
@@ -121,7 +121,7 @@ GOTO MENU
 ECHO.***********************************************
 ECHO.    选择下面的操作（需下载mod包，使用mod存在风险，请查看更新log2.3）
 ECHO.    
-ECHO.    1  首次使用前请选我下载mod包(若速度较慢请使用网盘下载链接：https://pan.baidu.com/s/1Y85E3rTRoUeXhEOUr3SGyQ 密码：xr0k)
+ECHO.    1  首次使用前请选我下载mod包（若下载速度过慢请用附带的网盘链接下载）
 ECHO.  
 ECHO.    2  备份存档并安装丝瓜mod
 ECHO. 
