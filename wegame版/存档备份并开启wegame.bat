@@ -18,6 +18,10 @@
 @echo -----------------------------------------
 @echo.
 @echo.
-@echo. 编辑“本文件”的下面的地址为你的wegame启动器地址
-start D:\堡壘之夜\GameLauncher\GameLauncher.exe
+start F:\Progra~1\WeGame\tgp_daemon.exe
+@echo -----------------------------------------
+@echo. 1若提示找不到文件，右键编辑“本文件”
+@echo. 2在记事本中修改上面的地址为你的wegame启动器地址
+@echo. 3注意需保留start，并且Program Files使用Progra~1代替
+@echo -----------------------------------------
 @pause
