@@ -128,13 +128,11 @@ GOTO MENU
 :mod1
 :MENU41
 ECHO.***********************************************
-ECHO.    选择下面的操作（需下载mod包，使用mod存在风险，请查看更新log2.3）
-ECHO.    
-ECHO.    1  首次使用前请选我下载mod包（若下载速度过慢请用附带的网盘链接下载）
-ECHO.  
-ECHO.    2  备份存档并安装丝瓜mod
+ECHO.    选择下面的操作（使用mod存在风险，请查看更新log2.3）
+ECHO.      
+ECHO.    1  一键下载并安装mod包(首次使用请选我)
 ECHO. 
-ECHO.    9  备份存档并安装以上全部mod
+ECHO.    9  选择安装mod（自行网盘下载mod包或之前成功通过一键安装过后使用）
 ECHO. 
 ECHO.    0  取消
 ECHO. 
@@ -143,25 +141,78 @@ echo.
 set /p  ID=
 if "%id%"=="1"  goto down1
 
-if "%id%"=="2"  goto mod11
-
-if "%id%"=="9"  goto mod19
+if "%id%"=="9"  goto mod11
 
 if "%id%"=="0" goto :MENU
 
 :down1
-echo.下载开始
-bitsadmin.exe /transfer "下载中，若速度较慢请使用网盘下载" http://www.moecn.com/mhw/MHWMODWG.zip D:\MHWMODWG.zip
-@echo f|xcopy D:\MHWMODWG.zip .\MHWMODWG.zip
-@del D:\MHWMODWG.zip
-@echo.下载完成，请右键单击MHWMODWG.zip选择解压到当前文件夹
-@echo.确保“MHWMODWG”文件夹，与“怪物猎人 世界(2000293)”文件夹以及本批处理在同一目录
-@echo.且“MHWMODWG”文件夹内直接可见bin目录
-choice /t 2 /d y /n >nul 
-@pause
-GOTO MENU41
+@mkdir .\MHWMODWG
+bitsadmin.exe /transfer "下载mod控制文件，若速度较慢请使用网盘下载" http://www.moecn.com/mhw/bin.cab D:\bin.cab
+@echo f|xcopy D:\bin.cab .\MHWMODWG\bin.cab
+@echo a|xcopy D:\bin.cab .\MHWMODWG\bin.cab
+@del D:\bin.cab
+
+bitsadmin.exe /transfer "获取mod网盘地址" http://www.moecn.com/mhw/bat/MHWMODWG网盘地址.txt D:\MHWMODWG网盘地址.txt
+@echo f|xcopy D:\MHWMODWG网盘地址.txt .\MHWMODWG网盘地址.txt
+@echo a|xcopy D:\MHWMODWG网盘地址.txt .\MHWMODWG网盘地址.txt
+@del D:\MHWMODWG网盘地址.txt
+
+@echo 初始化完成
+:MENU411
+ECHO.***********************************************
+ECHO.    选择希望下载并立刻安装的mod（若下载速度较慢请查看“MHWMODWG网盘地址”这个文件）
+ECHO.      
+ECHO.    1  丝瓜mod
+ECHO. 
+ECHO.    2  cpu减负mod
+ECHO. 
+ECHO.    0  返回
+ECHO. 
+ECHO.***********************************************
+echo.
+set /p  ID=
+if "%id%"=="1"  goto down11
+
+if "%id%"=="2"  goto down12
+
+if "%id%"=="0" goto :MENU41
+
+:down11
+bitsadmin.exe /transfer "下载丝瓜mod，若速度较慢请使用网盘下载" http://www.moecn.com/mhw/MOD01.cab D:\MOD01.cab 
+@del .\MHWMODWG\MOD01.cab
+@echo f|xcopy D:\MOD01.cab  .\MHWMODWG\MOD01.cab
+@del D:\MOD01.cab
+@echo.下载完成。
+GOTO mod111
+
+:down12
+@echo.请等待近期更新
+GOTO mod112
+
+
 
 :mod11
+
+:MENU412
+ECHO.***********************************************
+ECHO.    选择希望安装的mod（自行网盘下载mod包或之前成功通过一键安装过后使用）
+ECHO.      
+ECHO.    1  丝瓜mod
+ECHO. 
+ECHO.    2  cpu减负mod
+ECHO. 
+ECHO.    0  返回
+ECHO. 
+ECHO.***********************************************
+echo.
+set /p  ID=
+if "%id%"=="1"  goto mod111
+
+if "%id%"=="2"  goto mod112
+
+if "%id%"=="0" goto :MENU41
+
+:mod111
 @echo 备份存档中…………
 @echo.
 @echo.
@@ -181,45 +232,20 @@ GOTO MENU41
 @echo 本次的备份的存档文件名为：%filename% 
 @echo -----------------------------------------
 @echo. 
-@echo 按任意键开始安装丝瓜mod
-@pause
+@mkdir .\MHWMODWG\bin
+@EXPAND -F:*.* .\MHWMODWG\bin.cab .\MHWMODWG\bin\
 @call .\MHWMODWG\bin\install01.bat
+@rd .\MHWMODWG\bin\ /S /Q 
 @echo -----------------------------------------
 @echo 已安装丝瓜mod
 @echo -----------------------------------------
 choice /t 2 /d y /n >nul 
-GOTO MENU41
+GOTO MENU411
 
+:mod112
+@echo.请等待近期更新
+GOTO MENU411
 
-
-:mod19
-@echo 备份存档中…………
-@echo.
-@echo.
-@set YYYYmmdd=%date:~0,4%%date:~5,2%%date:~8,2%
-@set sec=%TIME:~3,2%%TIME:~6,2%
-@Set h=%TIME:~0,2%
-@If %h% leq 9 (Set h=0%h:~1,1%)
-@set hhmiss=%h%%sec%
-@set "filename=%YYYYmmdd%_%hhmiss%全部mod前"
-@rd  .\rail_user_data\BackUpSaveDate\NEW\2000293\ /S /Q 
-@xcopy .\rail_user_data\2000293\*.* .\rail_user_data\BackUpSaveDate\MOD\%filename%\ /S /Q /Y
-@xcopy .\rail_user_data\2000293\*.* .\rail_user_data\BackUpSaveDate\NEW\2000293\ /S /Q /Y
-@echo.
-@echo.
-@echo 备份完成！
-@echo -----------------------------------------
-@echo 本次的备份的存档文件名为：%filename% 
-@echo -----------------------------------------
-@echo.
-@echo 按任意键开始安装全部mod
-@pause
-@xcopy ".\MHWMOD\MOD01\*.*" ".\怪物猎人 世界(2000293)\nativePC\" /S /Q /Y /E
-@echo -----------------------------------------
-@echo 已安装全部mod
-@echo -----------------------------------------
-choice /t 2 /d y /n >nul 
-GOTO MENU41
 
 :mod2
 :MENU42
@@ -258,8 +284,10 @@ if "%id%"=="1"  goto mod211
 if "%id%"=="0" goto :MENU42
 
 :mod211
-
+@mkdir .\MHWMODWG\bin
+@EXPAND -F:*.* .\MHWMODWG\bin.cab .\MHWMODWG\bin\
 @call .\MHWMODWG\bin\uninstall01.bat
+@rd .\MHWMODWG\bin\ /S /Q 
 @echo -----------------------------------------
 @echo 已卸载丝瓜mod
 @echo -----------------------------------------

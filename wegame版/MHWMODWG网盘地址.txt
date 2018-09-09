@@ -1,0 +1,11 @@
+网盘手动下载mod必读
+
+当你看到这个文件时，本目录内会生成MHWMODWG文件夹
+
+以下所有的文件下载后均需放入MHWMODWG文件夹内
+
+网盘地址：https://pan.baidu.com/s/1N3q5-BO36DHA8uVg36qdXQ
+
+文件说明
+bin.cab         mod控制文件（必要）
+MOD01.cab       丝瓜mod    （可选）
