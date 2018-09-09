@@ -2,13 +2,18 @@
 @ECHO OFF
 CLS
 color 0a
-
 GOTO MENU
+:update
+echo.下载开始
+bitsadmin.exe /transfer "版本更新中" http://www.moecn.com/mhw/bat/存档备份wegame.bat D:\存档备份wegame.bat
+@echo A|xcopy D:\存档备份wegame.bat .\存档备份wegame.bat
+@del D:\存档备份wegame.bat
+@echo.更新完成
 :MENU
 ECHO.
-ECHO.                                =-=-=-=-=选择你要对存档进行的操作=-=-=-=-=
+ECHO.                                =-=-=选择你要对存档进行的操作 (v2.32)=-=-=
 ECHO.                                =                                        =
-ECHO.                                =            1  备份存档                 =
+ECHO.                                =            1  备份存档wegame           =
 ECHO.                                =                                        =
 ECHO.                                =            2  恢复上次备份             =
 ECHO.                                =                                        =
@@ -17,6 +22,8 @@ ECHO.                                =                                        =
 ECHO.                                =            4  备份并安装MOD            =
 ECHO.                                =                                        =
 ECHO.                                =            5  卸载MOD                  =
+ECHO.                                =                                        =
+ECHO.                                =            9  更新本批处理             =
 ECHO.                                =                                        =
 ECHO.                                =            0  退   出                  =
 ECHO.                                =                                        =
@@ -33,6 +40,8 @@ if "%id%"=="3" goto cmd3
 if "%id%"=="4" goto mod1
 
 if "%id%"=="5" goto mod2
+
+if "%id%"=="9" goto update
 
 IF "%id%"=="0"  exit
 PAUSE
@@ -57,7 +66,7 @@ PAUSE
 @echo -----------------------------------------
 @echo 本次的备份的存档文件名为：%filename% 
 @echo -----------------------------------------
-choice /t 5 /d y /n >nul 
+choice /t 2 /d y /n >nul 
 goto MENU
 
 :cmd2
@@ -86,7 +95,7 @@ if "%id%"=="0" goto :MENU
 @echo.
 @echo.
 @echo 恢复最新备份的存档完成！
-choice /t 5 /d y /n >nul 
+choice /t 2 /d y /n >nul 
 GOTO MENU
 
 :cmd3
@@ -112,7 +121,7 @@ if "%id%"=="0" goto :MENU
 @echo.
 @rd .\rail_user_data\BackUpSaveDate\OLD\ /S /Q 
 @echo 删除旧存档备份完成！
-choice /t 5 /d y /n >nul 
+choice /t 2 /d y /n >nul 
 GOTO MENU
 
 
@@ -142,13 +151,13 @@ if "%id%"=="0" goto :MENU
 
 :down1
 echo.下载开始
-bitsadmin.exe /transfer "下载中，若速度较慢请使用网盘下载" http://www.moecn.com/download/MHWMODWG.zip D:\MHWMODWG.zip
+bitsadmin.exe /transfer "下载中，若速度较慢请使用网盘下载" http://www.moecn.com/mhw/MHWMODWG.zip D:\MHWMODWG.zip
 @echo f|xcopy D:\MHWMODWG.zip .\MHWMODWG.zip
 @del D:\MHWMODWG.zip
 @echo.下载完成，请右键单击MHWMODWG.zip选择解压到当前文件夹
 @echo.确保“MHWMODWG”文件夹，与“怪物猎人 世界(2000293)”文件夹以及本批处理在同一目录
 @echo.且“MHWMODWG”文件夹内直接可见bin目录
-choice /t 5 /d y /n >nul 
+choice /t 2 /d y /n >nul 
 @pause
 GOTO MENU41
 
@@ -178,7 +187,7 @@ GOTO MENU41
 @echo -----------------------------------------
 @echo 已安装丝瓜mod
 @echo -----------------------------------------
-choice /t 5 /d y /n >nul 
+choice /t 2 /d y /n >nul 
 GOTO MENU41
 
 
@@ -209,7 +218,7 @@ GOTO MENU41
 @echo -----------------------------------------
 @echo 已安装全部mod
 @echo -----------------------------------------
-choice /t 5 /d y /n >nul 
+choice /t 2 /d y /n >nul 
 GOTO MENU41
 
 :mod2
@@ -254,7 +263,7 @@ if "%id%"=="0" goto :MENU42
 @echo -----------------------------------------
 @echo 已卸载丝瓜mod
 @echo -----------------------------------------
-choice /t 5 /d y /n >nul 
+choice /t 2 /d y /n >nul 
 
 GOTO MENU42
 :mod29
@@ -279,5 +288,6 @@ if "%id%"=="0" goto :MENU42
 @rd  ".\怪物猎人 世界(2000293)\nativePC\" /S /Q 
 @echo.
 @echo 已卸载全部mod
-choice /t 5 /d y /n >nul 
+choice /t 2 /d y /n >nul 
 GOTO MENU42
+

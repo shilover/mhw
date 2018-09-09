@@ -1,12 +1,17 @@
-cls
+﻿cls
 @ECHO OFF
 CLS
 color 0a
-
 GOTO MENU
+:update
+echo.下载开始
+bitsadmin.exe /transfer "版本更新中" http://www.moecn.com/mhw/bat/存档备份steam.bat D:\存档备份steam.bat
+@echo A|xcopy D:\存档备份steam.bat .\存档备份steam.bat
+@del D:\存档备份steam.bat
+@echo.更新完成
 :MENU
 ECHO.
-ECHO.                                =-=-=-=-=选择你要对存档进行的操作=-=-=-=-=
+ECHO.                                =-=-=选择你要对存档进行的操作 (v2.32)=-=-=
 ECHO.                                =                                        =
 ECHO.                                =            1  备份存档(Steam)          =
 ECHO.                                =                                        =
@@ -14,7 +19,9 @@ ECHO.                                =            2  恢复上次备份         
 ECHO.                                =                                        =
 ECHO.                                =            3  删除旧的备份             =
 ECHO.                                =                                        =
-ECHO.                                =            4  退   出                  =
+ECHO.                                =            9  更新本批处理             =
+ECHO.                                =                                        =
+ECHO.                                =            0  退   出                  =
 ECHO.                                =                                        =
 ECHO.                                =-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=
 ECHO.                             
@@ -26,7 +33,9 @@ if "%id%"=="2" goto cmd2
 
 if "%id%"=="3" goto cmd3
 
-IF "%id%"=="4"  exit
+if "%id%"=="9" goto update
+
+IF "%id%"=="0"  exit
 PAUSE
 
 :cmd1
@@ -49,7 +58,7 @@ PAUSE
 @echo -----------------------------------------
 @echo 本次的备份的存档文件名为：%filename% 
 @echo -----------------------------------------
-choice /t 5 /d y /n >nul 
+choice /t 2 /d y /n >nul 
 goto MENU
 
 :cmd2
@@ -78,7 +87,7 @@ if "%id%"=="2" goto :MENU
 @echo.
 @echo.
 @echo 恢复最新备份的存档完成！
-choice /t 5 /d y /n >nul 
+choice /t 2 /d y /n >nul 
 GOTO MENU
 
 :cmd3
@@ -104,5 +113,6 @@ if "%id%"=="2" goto :MENU
 @echo.
 @rd .\BackUpSaveDate\OLD\ /S /Q 
 @echo 删除旧存档备份完成！
-choice /t 5 /d y /n >nul 
+choice /t 2 /d y /n >nul 
 GOTO MENU
+
