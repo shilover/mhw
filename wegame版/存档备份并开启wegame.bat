@@ -18,5 +18,6 @@
 @echo -----------------------------------------
 @echo.
 @echo.
-@echo. 编辑下面的地址为你的wegame启动器地址
-@start D:\堡壘之夜\GameLauncher\GameLauncher.exe
+@echo. 编辑“本文件”的下面的地址为你的wegame启动器地址
+start D:\堡壘之夜\GameLauncher\GameLauncher.exe
+@pause
