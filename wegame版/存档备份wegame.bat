@@ -1,4 +1,4 @@
-﻿cls
+cls
 @ECHO OFF
 CLS
 color 0a
@@ -130,9 +130,11 @@ GOTO MENU
 ECHO.***********************************************
 ECHO.    选择下面的操作（使用mod存在风险，请查看更新log2.3）
 ECHO.      
-ECHO.    1  一键下载并安装mod包(首次使用请选我)
+ECHO.    1  一键下载并安装mod包（无人值守一键安装，如果网络相性好的话..）
 ECHO. 
-ECHO.    9  选择安装mod（自行网盘下载mod包或之前成功通过一键安装过后使用）
+ECHO.    8  手动下载mod（mod安装文件为cab结尾，请放在MHWMODWG文件夹内）
+ECHO. 
+ECHO.    9  选择安装mod（手动下载mod后使用）
 ECHO. 
 ECHO.    0  取消
 ECHO. 
@@ -143,7 +145,14 @@ if "%id%"=="1"  goto down1
 
 if "%id%"=="9"  goto mod11
 
+if "%id%"=="8"  goto baidu1
+
 if "%id%"=="0" goto :MENU
+
+:baidu1
+@mkdir .\MHWMODWG
+@start https://pan.baidu.com/s/1N3q5-BO36DHA8uVg36qdXQ
+@goto MENU41
 
 :down1
 @mkdir .\MHWMODWG
@@ -151,18 +160,12 @@ bitsadmin.exe /transfer "下载mod控制文件，若速度较慢请使用网盘�
 @echo f|xcopy D:\bin.cab .\MHWMODWG\bin.cab
 @echo a|xcopy D:\bin.cab .\MHWMODWG\bin.cab
 @del D:\bin.cab
-
-bitsadmin.exe /transfer "获取mod网盘地址" http://www.moecn.com/mhw/bat/MHWMODWG网盘地址.txt D:\MHWMODWG网盘地址.txt
-@echo f|xcopy D:\MHWMODWG网盘地址.txt .\MHWMODWG网盘地址.txt
-@echo a|xcopy D:\MHWMODWG网盘地址.txt .\MHWMODWG网盘地址.txt
-@del D:\MHWMODWG网盘地址.txt
-
 @echo 初始化完成
 :MENU411
 ECHO.***********************************************
 ECHO.    选择希望下载并立刻安装的mod（若下载速度较慢请查看“MHWMODWG网盘地址”这个文件）
 ECHO.      
-ECHO.    1  丝瓜mod
+ECHO.    1  丝瓜mod（大小：204.84M   来源/署名：群友/未知）
 ECHO. 
 ECHO.    2  cpu减负mod
 ECHO. 
@@ -178,7 +181,7 @@ if "%id%"=="2"  goto down12
 if "%id%"=="0" goto :MENU41
 
 :down11
-bitsadmin.exe /transfer "下载丝瓜mod，若速度较慢请使用网盘下载" http://www.moecn.com/mhw/MOD01.cab D:\MOD01.cab 
+bitsadmin.exe /transfer "下载丝瓜mod，若速度较慢请使用网盘下载" http://208.167.253.6/mhw/MOD01.cab D:\MOD01.cab 
 @del .\MHWMODWG\MOD01.cab
 @echo f|xcopy D:\MOD01.cab  .\MHWMODWG\MOD01.cab
 @del D:\MOD01.cab
