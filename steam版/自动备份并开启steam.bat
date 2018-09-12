@@ -23,7 +23,6 @@ set gamepath=.\..\..\Steam.exe
 @set hhmiss=%h%%sec%
 @set "filename=%YYYYmmdd%_%hhmiss%"
 @rd  .\BackUpSaveDate\NEW\582010\ /S /Q 
-@xcopy .\582010\*.* .\BackUpSaveDate\OLD\%filename%\ /S /Q /Y
 @xcopy .\582010\*.* .\BackUpSaveDate\NEW\582010\ /S /Q /Y
 @echo.正在开启steam，请稍等………… 关闭steam时将自动进行存档备份时将自动进行存档备份
 @echo.
