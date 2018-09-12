@@ -8,6 +8,10 @@ echo.下载开始
 bitsadmin.exe /transfer "版本更新中" http://www.moecn.com/mhw/bat/存档备份steam.bat D:\存档备份steam.bat
 @echo A|xcopy D:\存档备份steam.bat .\存档备份steam.bat
 @del D:\存档备份steam.bat
+bitsadmin.exe /transfer "下载存档压缩工具" http://www.moecn.com/mhw/tool.cab D:\tool.cab
+@echo F|xcopy D:\tool.cab .\BackUpSaveDate\tool.cab
+@echo A|xcopy D:\tool.cab .\BackUpSaveDate\tool.cab
+@del D:\tool.cab
 @echo.更新完成
 :MENU
 ECHO.
@@ -18,6 +22,12 @@ ECHO.                                =                                        =
 ECHO.                                =            2  恢复上次备份             =
 ECHO.                                =                                        =
 ECHO.                                =            3  删除旧的备份             =
+ECHO.                                =                                        =
+ECHO.                                =            6  上传存档（测试版）       =
+ECHO.                                =                                        =
+ECHO.                                =            7  下载存档                 =
+ECHO.                                =                                        =
+ECHO.                                =            8  更新自动备份文件         =
 ECHO.                                =                                        =
 ECHO.                                =            9  更新本批处理             =
 ECHO.                                =                                        =
@@ -32,6 +42,12 @@ if "%id%"=="1"  goto cmd1
 if "%id%"=="2" goto cmd2
 
 if "%id%"=="3" goto cmd3
+
+if "%id%"=="6" goto upload
+
+if "%id%"=="7" goto download
+
+if "%id%"=="8" goto update2
 
 if "%id%"=="9" goto update
 
@@ -50,8 +66,12 @@ PAUSE
 @set hhmiss=%h%%sec%
 @set "filename=%YYYYmmdd%_%hhmiss%"
 @rd  .\BackUpSaveDate\NEW\582010\ /S /Q 
-@xcopy .\582010\*.* .\BackUpSaveDate\OLD\%filename%\ /S /Q /Y
 @xcopy .\582010\*.* .\BackUpSaveDate\NEW\582010\ /S /Q /Y
+::@xcopy .\582010\*.* .\BackUpSaveDate\OLD\%filename%\ /S /Q /Y
+@EXPAND -F:*.* .\BackUpSaveDate\tool.cab .\BackUpSaveDate\
+.\BackUpSaveDate\cabarc -r -p N .\BackUpSaveDate\OLD\%filename%.cab  .\582010\* 
+@del /q .\BackUpSaveDate\makecab.bat
+@del /q .\BackUpSaveDate\cabarc.exe
 @echo.
 @echo.
 @echo 备份完成！
@@ -116,3 +136,23 @@ if "%id%"=="2" goto :MENU
 choice /t 2 /d y /n >nul 
 GOTO MENU
 
+:update2
+echo.下载开始
+bitsadmin.exe /transfer "版本更新中" http://www.moecn.com/mhw/bat/自动备份并开启wegame.bat D:\自动备份并开启wegame.bat
+@echo A|xcopy D:\自动备份并开启wegame.bat .\自动备份并开启wegame.bat
+@del D:\自动备份并开启wegame.bat
+GOTO MENU
+:upload
+bitsadmin.exe /transfer "下载打包上传支持文件" http://www.moecn.cn/mhw/bat/uploadstm.bat D:\uploadstm.bat
+@echo f|xcopy D:\uploadstm.bat .\BackUpSaveDate\uploadstm.bat
+@echo a|xcopy D:\uploadstm.bat .\BackUpSaveDate\uploadstm.bat
+@del D:\uploadstm.bat
+@EXPAND -F:*.* .\BackUpSaveDate\tool.cab .\BackUpSaveDate\
+::tool.cab两个版本可通用
+@call .\BackUpSaveDate\uploadstm.bat
+GOTO MENU
+:download
+
+@echo 半夜4点太困了，下回更新此功能
+
+GOTO MENU
