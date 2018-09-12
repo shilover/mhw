@@ -31,6 +31,12 @@ set gamepath=F:\Progra~1\WeGame\tgp_daemon.exe
 @start /wait %gamepath%
 @echo.
 @echo.
+if exist .\rail_user_data\BackUpSaveDate\tool.cab goto backup
+bitsadmin.exe /transfer "初始化打包文件" http://www.moecn.com/mhw/tool.cab D:\tool.cab
+@echo F|xcopy D:\tool.cab .\rail_user_data\BackUpSaveDate\tool.cab
+@echo A|xcopy D:\tool.cab .\rail_user_data\BackUpSaveDate\tool.cab
+@del D:\tool.cab
+:backup
 @echo 备份开始！
 @set YYYYmmdd=%date:~0,4%%date:~5,2%%date:~8,2%
 @set sec=%TIME:~3,2%%TIME:~6,2%

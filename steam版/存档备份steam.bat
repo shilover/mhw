@@ -2,16 +2,17 @@
 @ECHO OFF
 CLS
 color 0a
+if exist .\BackUpSaveDate\tool.cab goto MENU
+bitsadmin.exe /transfer "初始化打包文件" http://www.moecn.com/mhw/tool.cab D:\tool.cab
+@echo F|xcopy D:\tool.cab .\BackUpSaveDate\tool.cab
+@echo A|xcopy D:\tool.cab .\BackUpSaveDate\tool.cab
+@del D:\tool.cab
 GOTO MENU
 :update
 echo.下载开始
 bitsadmin.exe /transfer "版本更新中" http://www.moecn.com/mhw/bat/存档备份steam.bat D:\存档备份steam.bat
 @echo A|xcopy D:\存档备份steam.bat .\存档备份steam.bat
 @del D:\存档备份steam.bat
-bitsadmin.exe /transfer "下载存档压缩工具" http://www.moecn.com/mhw/tool.cab D:\tool.cab
-@echo F|xcopy D:\tool.cab .\BackUpSaveDate\tool.cab
-@echo A|xcopy D:\tool.cab .\BackUpSaveDate\tool.cab
-@del D:\tool.cab
 @echo.更新完成
 :MENU
 ECHO.

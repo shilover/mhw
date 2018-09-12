@@ -32,6 +32,12 @@ set gamepath=.\..\..\Steam.exe
 @start /wait %gamepath%
 @echo.
 @echo.
+if exist .\BackUpSaveDate\tool.cab goto backup
+bitsadmin.exe /transfer "初始化打包文件" http://www.moecn.com/mhw/tool.cab D:\tool.cab
+@echo F|xcopy D:\tool.cab .\BackUpSaveDate\tool.cab
+@echo A|xcopy D:\tool.cab .\BackUpSaveDate\tool.cab
+@del D:\tool.cab
+:backup
 @echo 备份开始！
 @rd  .\BackUpSaveDate\NEW\582010\ /S /Q 
 @xcopy .\582010\*.* .\BackUpSaveDate\NEW\582010\ /S /Q /Y
