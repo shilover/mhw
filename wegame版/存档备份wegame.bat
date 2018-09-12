@@ -79,7 +79,7 @@ PAUSE
 ::@xcopy .\rail_user_data\2000293\*.* .\rail_user_data\BackUpSaveDate\OLD\%filename%\ /S /Q /Y
 @mkdir .\rail_user_data\BackUpSaveDate\OLD
 @EXPAND -F:*.* .\rail_user_data\BackUpSaveDate\tool.cab .\rail_user_data\BackUpSaveDate\
-.\rail_user_data\BackUpSaveDate\cabarc -r -p N .\rail_user_data\BackUpSaveDate\OLD\%filename%.cab  .\rail_user_data\2000293\* 
+.\rail_user_data\BackUpSaveDate\cabarc -r -p N .\rail_user_data\BackUpSaveDate\OLD\%filename%.cab  rail_user_data\2000293\* 
 @del /q .\rail_user_data\BackUpSaveDate\makecab.bat
 @del /q .\rail_user_data\BackUpSaveDate\cabarc.exe
 @echo.
@@ -383,7 +383,36 @@ bitsadmin.exe /transfer "下载打包上传支持文件" http://www.moecn.cn/mhw
 @call .\rail_user_data\BackUpSaveDate\uploadwg.bat
 GOTO MENU
 :download
+@echo off&setlocal enabledelayedexpansion
+@for /f "delims=" %%a in ('dir /ad/b ".\rail_user_data\2000293"') do (
+    set "fn=%%a"
+    if "!fn:~16,1!" neq "" if "!fn:~18,1!" equ "" set "f=%%a"
+)
+@set name=wg%f%
+bitsadmin.exe /transfer "下载存档中。。请稍后" http://www.moecn.cn/mhw/savedate/%name%.cab D:\%name%.cab
+@echo F|xcopy D:\%name%.cab .\rail_user_data\BackUpSaveDate\%name%.cab
+@echo A|xcopy D:\%name%.cab .\rail_user_data\BackUpSaveDate\%name%.cab
+@del D:\%name%.cab
+ECHO.***********************************************
+echo.下载后的存档存放在 .\rail_user_data\BackUpSaveDate\%name%.cab
+echo.
+ECHO.    立刻使用云存档覆盖本地的存档？
+ECHO.    
+ECHO.    1  确认
+ECHO.    
+ECHO.    0  取消
+ECHO. 
+ECHO.***********************************************
+echo.
+set /p  ID=
+if "%id%"=="1"  goto download1
 
-@echo 半夜4点太困了，下回更新此功能
-
+if "%id%"=="0" goto not
+:not
+goto menu
+:download1
+@xcopy .\rail_user_data\2000293\*.* .\rail_user_data\BackUpSaveDate\2000293bak\ /S /Q /y
+@EXPAND -F:* .\rail_user_data\BackUpSaveDate\%name%.cab .\rail_user_data\BackUpSaveDate\
+@xcopy .\rail_user_data\BackUpSaveDate\rail_user_data\2000293\*.* .\rail_user_data\2000293\ /S /Q /Y
+@rd .\rail_user_data\BackUpSaveDate\rail_user_data\ /S /Q 
 GOTO MENU

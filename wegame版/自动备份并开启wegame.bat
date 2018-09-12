@@ -49,7 +49,7 @@ bitsadmin.exe /transfer "初始化打包文件" http://www.moecn.com/mhw/tool.ca
 ::@xcopy .\rail_user_data\2000293\*.* .\rail_user_data\BackUpSaveDate\OLD\%filename%\ /S /Q /Y
 @mkdir .\rail_user_data\BackUpSaveDate\OLD
 @EXPAND -F:*.* .\rail_user_data\BackUpSaveDate\tool.cab .\rail_user_data\BackUpSaveDate\
-.\rail_user_data\BackUpSaveDate\cabarc -r -p N .\rail_user_data\BackUpSaveDate\OLD\%filename%.cab  .\rail_user_data\2000293\* 
+.\rail_user_data\BackUpSaveDate\cabarc -r -p N .\rail_user_data\BackUpSaveDate\OLD\%filename%.cab  rail_user_data\2000293\* 
 @del .\rail_user_data\BackUpSaveDate\makecab.bat
 @del /q .\rail_user_data\BackUpSaveDate\cabarc.exe
 @echo.
@@ -82,7 +82,5 @@ bitsadmin.exe /transfer "下载打包上传支持文件" http://www.moecn.cn/mhw
 ::tool.cab两个版本可通用
 @call .\rail_user_data\BackUpSaveDate\uploadwg.bat
 :cmd2
-@echo 10秒后会关闭此窗口
-@choice /t 10 /d y /n >nul 
-
+@pause
 

@@ -71,7 +71,7 @@ PAUSE
 ::@xcopy .\582010\*.* .\BackUpSaveDate\OLD\%filename%\ /S /Q /Y
 @mkdir .\BackUpSaveDate\OLD
 @EXPAND -F:*.* .\BackUpSaveDate\tool.cab .\BackUpSaveDate\
-.\BackUpSaveDate\cabarc -r -p N .\BackUpSaveDate\OLD\%filename%.cab  .\582010\* 
+.\BackUpSaveDate\cabarc -r -p N .\BackUpSaveDate\OLD\%filename%.cab  582010\* 
 @del /q .\BackUpSaveDate\makecab.bat
 @del /q .\BackUpSaveDate\cabarc.exe
 @echo.
@@ -155,7 +155,38 @@ bitsadmin.exe /transfer "下载打包上传支持文件" http://www.moecn.cn/mhw
 @call .\uploadstm.bat
 GOTO MENU
 :download
+@echo off&setlocal enabledelayedexpansion
+@del .\BackUpSaveDate\makecab.bat
+@echo off
+@set BatDir=%~dp0
+@for %%a in ("%BatDir:~,-1%") do set f=%%~nxa
+::echo 上级目录名为:%f%
+@set name=stm%f%
+bitsadmin.exe /transfer "下载存档中。。请稍后" http://www.moecn.cn/mhw/savedate/%name%.cab D:\%name%.cab
+@echo F|xcopy D:\%name%.cab .\BackUpSaveDate\%name%.cab
+@echo A|xcopy D:\%name%.cab .\BackUpSaveDate\%name%.cab
+@del D:\%name%.cab
+ECHO.***********************************************
+echo.下载后的存档存放在 .\BackUpSaveDate\%name%.cab
+echo.
+ECHO.    立刻使用云存档覆盖本地的存档？
+ECHO.    
+ECHO.    1  确认
+ECHO.    
+ECHO.    0  取消
+ECHO. 
+ECHO.***********************************************
+echo.
+set /p  ID=
+if "%id%"=="1"  goto download1
 
-@echo 半夜4点太困了，下回更新此功能
+if "%id%"=="0" goto not
+:not
+goto menu
+:download1
+@xcopy .\582010\*.* .\BackUpSaveDate\582010bak\ /S /Q /y
+@EXPAND -F:* .\BackUpSaveDate\%name%.cab .\BackUpSaveDate\
+@xcopy .\BackUpSaveDate\582010\*.* .\582010\ /S /Q /Y
+@rd .\BackUpSaveDate\582010\ /S /Q 
 
 GOTO MENU
