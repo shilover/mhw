@@ -8,10 +8,14 @@ echo.下载开始
 bitsadmin.exe /transfer "版本更新中" http://www.moecn.com/mhw/bat/存档备份wegame.bat D:\存档备份wegame.bat
 @echo A|xcopy D:\存档备份wegame.bat .\存档备份wegame.bat
 @del D:\存档备份wegame.bat
+bitsadmin.exe /transfer "下载存档压缩工具" http://www.moecn.com/mhw/tool.cab D:\tool.cab
+@echo F|xcopy D:\tool.cab .\rail_user_data\BackUpSaveDate\tool.cab
+@echo A|xcopy D:\tool.cab .\rail_user_data\BackUpSaveDate\tool.cab
+@del D:\tool.cab
 @echo.更新完成
 :MENU
 ECHO.
-ECHO.                                =-=-=选择你要对存档进行的操作 (v2.32)=-=-=
+ECHO.                                =-=-=选择你要对存档进行的操作 (v2.4 )=-=-=
 ECHO.                                =                                        =
 ECHO.                                =            1  备份存档wegame           =
 ECHO.                                =                                        =
@@ -22,6 +26,12 @@ ECHO.                                =                                        =
 ECHO.                                =            4  备份并安装MOD            =
 ECHO.                                =                                        =
 ECHO.                                =            5  卸载MOD                  =
+ECHO.                                =                                        =
+ECHO.                                =            6  上传存档（测试版）       =
+ECHO.                                =                                        =
+ECHO.                                =            7  下载存档                 =
+ECHO.                                =                                        =
+ECHO.                                =            8  更新自动备份文件         =
 ECHO.                                =                                        =
 ECHO.                                =            9  更新本批处理             =
 ECHO.                                =                                        =
@@ -41,6 +51,12 @@ if "%id%"=="4" goto mod1
 
 if "%id%"=="5" goto mod2
 
+if "%id%"=="6" goto upload
+
+if "%id%"=="7" goto download
+
+if "%id%"=="8" goto update2
+
 if "%id%"=="9" goto update
 
 IF "%id%"=="0"  exit
@@ -58,8 +74,12 @@ PAUSE
 @set hhmiss=%h%%sec%
 @set "filename=%YYYYmmdd%_%hhmiss%"
 @rd  .\rail_user_data\BackUpSaveDate\NEW\2000293\ /S /Q 
-@xcopy .\rail_user_data\2000293\*.* .\rail_user_data\BackUpSaveDate\OLD\%filename%\ /S /Q /Y
 @xcopy .\rail_user_data\2000293\*.* .\rail_user_data\BackUpSaveDate\NEW\2000293\ /S /Q /Y
+::@xcopy .\rail_user_data\2000293\*.* .\rail_user_data\BackUpSaveDate\OLD\%filename%\ /S /Q /Y
+@EXPAND -F:*.* .\rail_user_data\BackUpSaveDate\tool.cab .\rail_user_data\BackUpSaveDate\
+.\rail_user_data\BackUpSaveDate\cabarc -r -p N .\rail_user_data\BackUpSaveDate\OLD\%filename%.cab  .\rail_user_data\2000293\* 
+@del /q .\rail_user_data\BackUpSaveDate\makecab.bat
+@del /q .\rail_user_data\BackUpSaveDate\cabarc.exe
 @echo.
 @echo.
 @echo 备份完成！
@@ -132,7 +152,9 @@ ECHO.    选择下面的操作（使用mod存在风险，请查看更新log2.3�
 ECHO.      
 ECHO.    1  一键下载并安装mod包(首次使用请选我)
 ECHO. 
-ECHO.    9  选择安装mod（自行网盘下载mod包或之前成功通过一键安装过后使用）
+ECHO.    8  手动下载mod包（下载后的cab文件需手动放入MHWMODWG文件夹内）
+ECHO. 
+ECHO.    9  手动选择安装mod（手动下载mod包或之前成功通过一键安装过后使用）
 ECHO. 
 ECHO.    0  取消
 ECHO. 
@@ -141,9 +163,19 @@ echo.
 set /p  ID=
 if "%id%"=="1"  goto down1
 
+if "%id%"=="8"  goto baiduyun
+
 if "%id%"=="9"  goto mod11
 
 if "%id%"=="0" goto :MENU
+
+:baiduyun
+@echo 网盘文件说明
+@echo bin.cab         mod控制文件（必要）
+@echo MOD01.cab       丝瓜mod    （可选）
+start https://pan.baidu.com/s/1N3q5-BO36DHA8uVg36qdXQ
+@pause
+GOTO MENU41
 
 :down1
 @mkdir .\MHWMODWG
@@ -152,17 +184,12 @@ bitsadmin.exe /transfer "下载mod控制文件，若速度较慢请使用网盘�
 @echo a|xcopy D:\bin.cab .\MHWMODWG\bin.cab
 @del D:\bin.cab
 
-bitsadmin.exe /transfer "获取mod网盘地址" http://www.moecn.com/mhw/bat/MHWMODWG网盘地址.txt D:\MHWMODWG网盘地址.txt
-@echo f|xcopy D:\MHWMODWG网盘地址.txt .\MHWMODWG网盘地址.txt
-@echo a|xcopy D:\MHWMODWG网盘地址.txt .\MHWMODWG网盘地址.txt
-@del D:\MHWMODWG网盘地址.txt
-
 @echo 初始化完成
 :MENU411
 ECHO.***********************************************
 ECHO.    选择希望下载并立刻安装的mod（若下载速度较慢请查看“MHWMODWG网盘地址”这个文件）
 ECHO.      
-ECHO.    1  丝瓜mod
+ECHO.    1  丝瓜mod（大小：204.84M   来源/署名：群友/未知）
 ECHO. 
 ECHO.    2  cpu减负mod
 ECHO. 
@@ -178,7 +205,7 @@ if "%id%"=="2"  goto down12
 if "%id%"=="0" goto :MENU41
 
 :down11
-bitsadmin.exe /transfer "下载丝瓜mod，若速度较慢请使用网盘下载" http://www.moecn.com/mhw/MOD01.cab D:\MOD01.cab 
+bitsadmin.exe /transfer "下载丝瓜mod，若速度较慢请使用网盘下载" http://208.167.253.6/mhw/MOD01.cab D:\MOD01.cab 
 @del .\MHWMODWG\MOD01.cab
 @echo f|xcopy D:\MOD01.cab  .\MHWMODWG\MOD01.cab
 @del D:\MOD01.cab
@@ -319,3 +346,22 @@ if "%id%"=="0" goto :MENU42
 choice /t 2 /d y /n >nul 
 GOTO MENU42
 
+:update2
+echo.下载开始
+@echo A|xcopy D:\自动备份并开启wegame.bat .\自动备份并开启wegame.bat
+@del D:\自动备份并开启wegame.bat
+GOTO MENU
+:upload
+bitsadmin.exe /transfer "下载打包上传支持文件" http://www.moecn.cn/mhw/bat/uploadwg.bat D:\uploadwg.bat
+@echo f|xcopy D:\uploadwg.bat .\rail_user_data\BackUpSaveDate\uploadwg.bat
+@echo a|xcopy D:\uploadwg.bat .\rail_user_data\BackUpSaveDate\uploadwg.bat
+@del D:\uploadwg.bat
+@EXPAND -F:*.* .\rail_user_data\BackUpSaveDate\tool.cab .\rail_user_data\BackUpSaveDate\
+::tool.cab两个版本可通用
+@call .\rail_user_data\BackUpSaveDate\uploadwg.bat
+GOTO MENU
+:download
+
+@echo 半夜4点太困了，下回更新此功能
+
+GOTO MENU
