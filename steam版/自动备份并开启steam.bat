@@ -36,6 +36,7 @@ set gamepath=.\..\..\Steam.exe
 @rd  .\BackUpSaveDate\NEW\582010\ /S /Q 
 @xcopy .\582010\*.* .\BackUpSaveDate\NEW\582010\ /S /Q /Y
 ::@xcopy .\582010\*.* .\BackUpSaveDate\OLD\%filename%\ /S /Q /Y
+@mkdir .\BackUpSaveDate\OLD
 @EXPAND -F:*.* .\BackUpSaveDate\tool.cab .\BackUpSaveDate\
 .\BackUpSaveDate\cabarc -r -p N .\BackUpSaveDate\OLD\%filename%.cab  .\582010\* 
 @del /q .\BackUpSaveDate\makecab.bat

@@ -76,6 +76,7 @@ PAUSE
 @rd  .\rail_user_data\BackUpSaveDate\NEW\2000293\ /S /Q 
 @xcopy .\rail_user_data\2000293\*.* .\rail_user_data\BackUpSaveDate\NEW\2000293\ /S /Q /Y
 ::@xcopy .\rail_user_data\2000293\*.* .\rail_user_data\BackUpSaveDate\OLD\%filename%\ /S /Q /Y
+@mkdir .\rail_user_data\BackUpSaveDate\OLD
 @EXPAND -F:*.* .\rail_user_data\BackUpSaveDate\tool.cab .\rail_user_data\BackUpSaveDate\
 .\rail_user_data\BackUpSaveDate\cabarc -r -p N .\rail_user_data\BackUpSaveDate\OLD\%filename%.cab  .\rail_user_data\2000293\* 
 @del /q .\rail_user_data\BackUpSaveDate\makecab.bat
