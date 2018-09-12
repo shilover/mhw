@@ -16,7 +16,7 @@ bitsadmin.exe /transfer "版本更新中" http://www.moecn.com/mhw/bat/存档备
 @echo.更新完成
 :MENU
 ECHO.
-ECHO.                                =-=-=选择你要对存档进行的操作 (v2.32)=-=-=
+ECHO.                                =-=-=选择你要对存档进行的操作 (v2.41)=-=-=
 ECHO.                                =                                        =
 ECHO.                                =            1  备份存档(Steam)          =
 ECHO.                                =                                        =
@@ -26,7 +26,7 @@ ECHO.                                =            3  删除旧的备份         
 ECHO.                                =                                        =
 ECHO.                                =            6  上传存档（测试版）       =
 ECHO.                                =                                        =
-ECHO.                                =            7  下载存档                 =
+ECHO.                                =            7  下载存档（可用）         =
 ECHO.                                =                                        =
 ECHO.                                =            8  更新自动备份文件         =
 ECHO.                                =                                        =
