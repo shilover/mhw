@@ -1,4 +1,4 @@
-﻿cls
+cls
 @ECHO OFF
 CLS
 color 0a
@@ -151,11 +151,16 @@ GOTO MENU
 ECHO.***********************************************
 ECHO.    选择下面的操作（使用mod存在风险，请查看更新log2.3）
 ECHO.      
-ECHO.    1  一键下载并安装mod包(首次使用请选我)
 ECHO. 
+<<<<<<< HEAD
 ECHO.    8  手动下载mod包（下载后的cab文件需手动放入MHWMODWG文件夹内）
 ECHO. 
 ECHO.    9  手动选择安装mod（手动下载mod包或之前成功通过一键安装过后使用）
+=======
+ECHO.    8  手动下载mod（mod安装文件为cab结尾，请放在MHWMODWG文件夹内）
+ECHO. 
+ECHO.    9  选择安装mod（手动下载mod后使用）
+>>>>>>> 8cecea23a7f4508a148c8399612b25aa5cc3df69
 ECHO. 
 ECHO.    0  取消
 ECHO. 
@@ -168,8 +173,11 @@ if "%id%"=="8"  goto baiduyun
 
 if "%id%"=="9"  goto mod11
 
+if "%id%"=="8"  goto baidu1
+
 if "%id%"=="0" goto :MENU
 
+<<<<<<< HEAD
 :baiduyun
 @echo 网盘文件说明
 @echo bin.cab         mod控制文件（必要）
@@ -177,6 +185,12 @@ if "%id%"=="0" goto :MENU
 start https://pan.baidu.com/s/1N3q5-BO36DHA8uVg36qdXQ
 @pause
 GOTO MENU41
+=======
+:baidu1
+@mkdir .\MHWMODWG
+@start https://pan.baidu.com/s/1N3q5-BO36DHA8uVg36qdXQ
+@goto MENU41
+>>>>>>> 8cecea23a7f4508a148c8399612b25aa5cc3df69
 
 :down1
 @mkdir .\MHWMODWG
@@ -184,7 +198,10 @@ bitsadmin.exe /transfer "下载mod控制文件，若速度较慢请使用网盘�
 @echo f|xcopy D:\bin.cab .\MHWMODWG\bin.cab
 @echo a|xcopy D:\bin.cab .\MHWMODWG\bin.cab
 @del D:\bin.cab
+<<<<<<< HEAD
 
+=======
+>>>>>>> 8cecea23a7f4508a148c8399612b25aa5cc3df69
 @echo 初始化完成
 :MENU411
 ECHO.***********************************************
