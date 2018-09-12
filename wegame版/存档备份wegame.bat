@@ -369,6 +369,7 @@ GOTO MENU42
 :update2
 echo.下载开始
 bitsadmin.exe /transfer "版本更新中" http://www.moecn.com/mhw/bat/自动备份并开启wegame.bat D:\自动备份并开启wegame.bat
+@echo F|xcopy D:\自动备份并开启wegame.bat .\自动备份并开启wegame.bat
 @echo A|xcopy D:\自动备份并开启wegame.bat .\自动备份并开启wegame.bat
 @del D:\自动备份并开启wegame.bat
 GOTO MENU

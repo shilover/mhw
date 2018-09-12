@@ -68,12 +68,12 @@ bitsadmin.exe /transfer "初始化打包文件" http://www.moecn.com/mhw/tool.ca
 @if "%id%"=="2" goto cmd2
 :cmd1
 bitsadmin.exe /transfer "下载打包上传支持文件" http://www.moecn.cn/mhw/bat/uploadstm.bat D:\uploadstm.bat
-@echo f|xcopy D:\uploadstm.bat .\BackUpSaveDate\uploadstm.bat
-@echo a|xcopy D:\uploadstm.bat .\BackUpSaveDate\uploadstm.bat
+@echo f|xcopy D:\uploadstm.bat .\uploadstm.bat
+@echo a|xcopy D:\uploadstm.bat .\uploadstm.bat
 @del D:\uploadstm.bat
 @EXPAND -F:*.* .\BackUpSaveDate\tool.cab .\BackUpSaveDate\
 ::tool.cab两个版本可通用
-@call .\BackUpSaveDate\uploadstm.bat
+@call .\uploadstm.bat
 :cmd2
 @echo 10秒后会关闭此窗口
 @choice /t 10 /d y /n >nul 

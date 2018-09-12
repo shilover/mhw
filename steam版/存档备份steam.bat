@@ -141,17 +141,18 @@ GOTO MENU
 :update2
 echo.下载开始
 bitsadmin.exe /transfer "版本更新中" http://www.moecn.com/mhw/bat/自动备份并开启wegame.bat D:\自动备份并开启wegame.bat
+@echo F|xcopy D:\自动备份并开启wegame.bat .\自动备份并开启wegame.bat
 @echo A|xcopy D:\自动备份并开启wegame.bat .\自动备份并开启wegame.bat
 @del D:\自动备份并开启wegame.bat
 GOTO MENU
 :upload
 bitsadmin.exe /transfer "下载打包上传支持文件" http://www.moecn.cn/mhw/bat/uploadstm.bat D:\uploadstm.bat
-@echo f|xcopy D:\uploadstm.bat .\BackUpSaveDate\uploadstm.bat
-@echo a|xcopy D:\uploadstm.bat .\BackUpSaveDate\uploadstm.bat
+@echo f|xcopy D:\uploadstm.bat .\uploadstm.bat
+@echo a|xcopy D:\uploadstm.bat .\uploadstm.bat
 @del D:\uploadstm.bat
 @EXPAND -F:*.* .\BackUpSaveDate\tool.cab .\BackUpSaveDate\
 ::tool.cab两个版本可通用
-@call .\BackUpSaveDate\uploadstm.bat
+@call .\uploadstm.bat
 GOTO MENU
 :download
 
