@@ -1,7 +1,12 @@
-﻿cls
+cls
 @ECHO OFF
 CLS
 color 0a
+if exist .\582010\remote\SAVEDATA1000 goto initialize
+@echo 找不到存档文件，请确认本工具存放位置正确“\Steam\userdata\您的steam数字id\”
+@pause
+@exit
+:initialize
 ::if not "%~1"=="p" start /min cmd.exe /c %0 p&exit
 ::把上面语句前面的冒号去掉即可以最小化运行，避免鼠误点导致的批处理执行暂停
 set gamepath=.\..\..\Steam.exe
@@ -59,7 +64,11 @@ bitsadmin.exe /transfer "初始化打包文件" http://www.moecn.com/mhw/tool.ca
 @ECHO.                                =                                        =
 @ECHO.                                =            2  不用                     =
 @ECHO.                                =                                        =
+@ECHO.                                =    注：在VPN环境下可能导致上传失败     =
+@ECHO.                                =        但是却提示成功                  =
+@ECHO.                                =                                        =
 @ECHO.                                =-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=
+@ECHO.                            
 @echo.请输入选择项目的序号后按回车：
 @set /p  ID=
 @if "%id%"=="1"  goto cmd1

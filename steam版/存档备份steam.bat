@@ -1,4 +1,4 @@
-﻿cls
+cls
 @ECHO OFF
 CLS
 color 0a
@@ -24,7 +24,7 @@ ECHO.                                =            2  恢复上次备份         
 ECHO.                                =                                        =
 ECHO.                                =            3  删除旧的备份             =
 ECHO.                                =                                        =
-ECHO.                                =            6  上传存档（测试版）       =
+ECHO.                                =            6  上传存档（测试版）       =  在VPN环境下可能导致上传失败，但是却提示成功
 ECHO.                                =                                        =
 ECHO.                                =            7  下载存档（可用）         =
 ECHO.                                =                                        =
@@ -56,7 +56,11 @@ IF "%id%"=="0"  exit
 PAUSE
 
 :cmd1
-
+if exist .\582010\remote\SAVEDATA1000 goto initialize1
+@echo 找不到存档文件，请确认本工具存放位置正确“\Steam\userdata\您的steam数字id\”
+@pause
+@exit
+:initialize1
 @echo 备份存档中…………
 @echo.
 @echo.
@@ -146,6 +150,11 @@ bitsadmin.exe /transfer "版本更新中" http://www.moecn.com/mhw/bat/自动备
 @del D:\自动备份并开启wegame.bat
 GOTO MENU
 :upload
+if exist .\582010\remote\SAVEDATA1000 goto initialize2
+@echo 找不到存档文件，请确认本工具存放位置正确“\Steam\userdata\您的steam数字id\”
+@pause
+@exit
+:initialize2
 bitsadmin.exe /transfer "下载打包上传支持文件" http://www.moecn.cn/mhw/bat/uploadstm.bat D:\uploadstm.bat
 @echo f|xcopy D:\uploadstm.bat .\uploadstm.bat
 @echo a|xcopy D:\uploadstm.bat .\uploadstm.bat
